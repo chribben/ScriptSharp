@@ -1,20 +1,18 @@
 ﻿using System;
 using Microsoft.CodeAnalysis.Scripting;
-using Microsoft.CodeAnalysis.Scripting.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Scripting;
 
 namespace ScriptSharp.ScriptEngine
 {
     public class CSharpScriptEngine
     {
-        private static Script _previousInput;
-        private static Lazy<object> _nextInputState = new Lazy<object>();
+        private static ScriptState<object> scriptState = null;
         public static object Execute(string code)
         {
-            var script = CSharpScript.Create(code, ScriptOptions.Default).WithPrevious(_previousInput);
-            var endState = script.Run(_nextInputState.Value);
-            _previousInput = endState.Script;
-            _nextInputState = new Lazy<object>(() => endState);
-            return endState.ReturnValue;
+            scriptState = scriptState == null ? CSharpScript.RunAsync(code).Result : scriptState.ContinueWithAsync(code).Result;
+            if (scriptState.ReturnValue != null && !string.IsNullOrEmpty(scriptState.ReturnValue.ToString()))
+                return scriptState.ReturnValue;
+            return "";
         }
     }
 }
