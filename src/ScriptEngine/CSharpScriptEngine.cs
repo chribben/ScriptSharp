@@ -12,7 +12,7 @@ namespace ScriptSharp.ScriptEngine
             scriptState = scriptState == null ? CSharpScript.RunAsync(code).Result : scriptState.ContinueWithAsync(code).Result;
             if (scriptState.ReturnValue != null && !string.IsNullOrEmpty(scriptState.ReturnValue.ToString()))
                 return scriptState.ReturnValue;
-            return "";
+            return null;
         }
     }
 }
