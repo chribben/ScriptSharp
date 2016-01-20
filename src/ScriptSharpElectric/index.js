@@ -1,11 +1,17 @@
-<!DOCTYPE html>
-<html>
-  <body>
-      <textarea id="ta" style="width:100%;height:500px">
-      </textarea>
-    <script>
-(function() {
-  var ta = document.getElementById('ta');
+var edge = require('electron-edge')
+
+var hello = edge.func(function () {/*
+   async (input) => { 
+       return ".NET welcomes " + input.ToString(); 
+   }
+*/});
+
+hello('Node.js', function (error, result) {
+   if (error) throw error;
+   console.log(result);
+});
+
+ var ta = document.getElementById('ta');
 ta.onkeydown = function (event) {
     if (event.defaultPrevented) {
         return;
@@ -28,9 +34,8 @@ ta.onkeydown = function (event) {
     if (handled) {
         event.preventDefault();
     };
+ };
 
-};
- 
 function sendCode(code)
 {
  //   var xmlhttp = new XMLHttpRequest();
@@ -38,7 +43,7 @@ function sendCode(code)
  //   xmlhttp.setRequestHeader("Content-type","application/json");
  //   xmlhttp.send("'" + code + "'");
  //   alert('Code sent: ' + code);
-    alert('send code');
+    alert('Selected code: ' + code);
 }
 function getSelectedText() {
     var ta = document.getElementById('ta');
@@ -58,8 +63,3 @@ function getSelectedText() {
     return selectedText;
 
 }
-})();  
-</script>
-<script src="index.js"></script>
-  </body>
-</html>
