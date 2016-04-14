@@ -1,6 +1,6 @@
 ﻿using System;
-using Microsoft.Owin.Hosting;
 using ScriptSharp.ScriptEngine;
+using Microsoft.Owin.Hosting;
 
 namespace ScriptSharp.Repl
 {

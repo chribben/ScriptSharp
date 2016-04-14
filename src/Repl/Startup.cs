@@ -1,5 +1,6 @@
 ﻿using System.Web.Http;
 using Owin;
+using Microsoft.Owin.Builder;
 
 namespace ScriptSharp.Repl
 {
